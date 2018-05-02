@@ -9,7 +9,7 @@ class TCPServer {
         int port = config.getPort();
         ServerSocket serverSocket = new ServerSocket(port);
         boolean flag = true;
-        while(flag) {
+        while(true) {
             Socket connectionSocket = serverSocket.accept();
             new Thread(new ServerThread(connectionSocket)).start();
         }
