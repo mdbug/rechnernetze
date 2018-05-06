@@ -18,7 +18,7 @@ public class Client {
         int port = config.getPort();
         socket = new Socket("localhost", port);
         serverListener = new ServerListener(socket);
-        serverListener.run();
+        serverListener.start();
         outToServer = new DataOutputStream(socket.getOutputStream());
     }
 
@@ -26,11 +26,14 @@ public class Client {
         Client client = new Client();
 
         String response = "";
+        Scanner scanner = new Scanner(System.in);
         while(!response.contains("\\EXIT")) {
-            String message = client.promptForNewMessage();
-            client.sendToServer(message);
-            response = client.serverListener.waitForMessage();
-            System.out.println("FROM SERVER: " + response);
+            if (scanner.hasNextLine()) {
+                String message = scanner.nextLine();
+                client.sendToServer(message);
+            }
+            //response = client.serverListener.waitForMessage();
+            //System.out.println("FROM SERVER: " + response);
         }
         client.stop();
     }
@@ -45,10 +48,5 @@ public class Client {
 
     public boolean isRunning() {
         return running;
-    }
-
-    public String promptForNewMessage() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
     }
 }

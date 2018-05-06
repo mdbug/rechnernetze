@@ -10,16 +10,19 @@ public class ServerListener extends Thread {
 
     public ServerListener(Socket socket) throws IOException {
         this.socket = socket;
-        DataInputStream inFromServer = new DataInputStream(socket.getInputStream());
+        inFromServer = new DataInputStream(socket.getInputStream());
     }
 
     @Override
     public void run() {
-
-    }
-
-    public void processReceivedMessage(String message) {
-
+        while(true) {
+            try {
+                String message = waitForMessage();
+                System.out.println("FROM SERVER:\n" + message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public String waitForMessage() throws IOException {
