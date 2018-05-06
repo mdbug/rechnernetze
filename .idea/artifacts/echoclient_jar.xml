@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="echoclient:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/echoclient_jar</output-path>
+    <root id="archive" name="rechnernetze.jar">
+      <element id="module-output" name="rechnernetze" />
+    </root>
+  </artifact>
+</component>
